@@ -27,7 +27,7 @@
                         <h1>Admin panel</h1>
                         <div class="card mt-5">
                             <div class="card-header">
-                                <button type="button" class="btn btn-light">All Users</button>
+                                <a href="/admin/gen" class="btn btn-light">All Users</a>
                                 <a href="/admin/new" class="btn btn-light">New User</a>
                             </div>
 
@@ -35,7 +35,6 @@
                                 <h2>All Users</h2>
                             </div>
                             <div class="card-body">
-
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>
@@ -61,7 +60,6 @@
                                                     th:value="${user.id}">Edit
                                             </button>
                                         </td>
-                                        <br/><br/>
                                         <td th:method="post" th:action="@{/admin/delete}">
                                             <button type="submit" class="btn btn-danger btn-sm" th:name="id"
                                                     th:value="${user.id}">Delete

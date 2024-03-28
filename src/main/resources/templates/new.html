@@ -53,16 +53,13 @@
                                         <input type="text" th:field="*{password}" id="password" required/>
                                     </div>
                                     <div class="form-group text-center">
-                                    <label for="roles">Roles</label>
-                                    <select id="roles" name="roles" th:field="*{roles}" multiple>
-                                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}">Admin</option>
-                                        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.role}">User</option>
-                                    </select>
+                                        <label for="roles">Roles</label>
+                                        <select id="roles" name="roles" th:field="*{roles}" multiple>
+                                            <option th:each="role : ${roles}" th:value="${role.id}" th:text="${#strings.substringAfter(role.role, 'ROLE_')}" ></option>
+                                        </select>
                                     </div>
-
-
                                     <div class="text-center">
-                                    <input type="submit"  class="btn btn-success" value="add"/>
+                                        <input type="submit" class="btn btn-success" value="add"/>
                                     </div>
                                 </form>
 
