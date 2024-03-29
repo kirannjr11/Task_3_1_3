@@ -16,8 +16,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3 bg-white text-primary d-flex flex-column vh-100 ">
-            <form action="/admin/user" method="GET">
-                <button type="submit" class="btn btn-white btn-lg btn-block active">Admin Panel</button>
+            <form action="/admin/gen" method="GET">
+                <button type="submit" class="btn btn-white btn-lg btn-block active">Admin</button>
             </form>
             <form action="/admin/user" method="GET">
                 <button type="submit" class="btn btn-white btn-lg btn-block active">User</button>
@@ -32,7 +32,9 @@
                         <h1>Admin panel</h1>
                         <div class="card mt-5">
                             <div class="card-header">
-                                <a href="@{/admin/gen}" class="btn btn-light">All Users</a>
+                                <form action="/admin/gen" method="GET">
+                                    <button type="submit" class="btn btn-light">All Users</button>
+                                </form>
                                 <a href="/admin/new" class="btn btn-light">New User</a>
                             </div>
 
