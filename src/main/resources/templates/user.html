@@ -21,7 +21,12 @@
     <div class="row">
         <!-- Navigation Sidebar -->
         <div class="col-md-3 bg-white text-primary d-flex flex-column vh-100 ">
-            <button type="button" class="btn btn-white btn-lg btn-block active">User</button>
+            <form action="/admin/user" method="GET">
+                <button type="submit" class="btn btn-white btn-lg btn-block active">Admin Panel</button>
+            </form>
+            <form action="/admin/user" method="GET">
+                <button type="submit" class="btn btn-white btn-lg btn-block active">User</button>
+            </form>
         </div>
 
         <!-- Main Content Area -->
@@ -48,11 +53,11 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td th:text="${user.id}"></td>
-                                            <td th:text="${user.firstName}"></td>
-                                            <td th:text="${user.lastName}"></td>
-                                            <td th:text="${user.country}"></td>
-                                            <td th:text="${user.roles}"></td>
+                                            <td th:text="${user.isPresent() ? user.get().id : ''}"></td>
+                                            <td th:text="${user.isPresent() ? user.get().firstName : ''}"></td>
+                                            <td th:text="${user.isPresent() ? user.get().lastName : ''}"></td>
+                                            <td th:text="${user.isPresent() ? user.get().country : ''}"></td>
+                                            <td th:text="${user.isPresent() ? user.get().roles : ''}"></td>
                                         </tr>
                                         </tbody>
                                     </table>

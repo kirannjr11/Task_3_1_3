@@ -65,7 +65,7 @@ public class UserController {
         return "/index";
     }
 
-    @GetMapping("/user")
+    @GetMapping("/admin/user")
     public ModelAndView user(Principal principal) {
         ModelAndView mov = new ModelAndView("/user");
         mov.addObject("user", userService.findByName(principal.getName()));
