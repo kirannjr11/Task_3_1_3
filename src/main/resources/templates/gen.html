@@ -16,8 +16,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3 bg-white text-primary d-flex flex-column vh-100 ">
-            <button type="button" class="btn btn-white btn-lg btn-block active">Admin</button>
-            <button type="button" class="btn btn-white btn-lg btn-block active">User</button>
+
+            <a href="/admin/user" class="btn btn-white btn-lg btn-block active">User</a>
         </div>
 
         <div class="col-lg-9 bg-light text-dark d-flex flex-column vh-100">
@@ -27,7 +27,7 @@
                         <h1>Admin panel</h1>
                         <div class="card mt-5">
                             <div class="card-header">
-                                <a href="/admin/gen" class="btn btn-light">All Users</a>
+                                <a href="@{/admin/gen}" class="btn btn-light">All Users</a>
                                 <a href="/admin/new" class="btn btn-light">New User</a>
                             </div>
 
@@ -55,16 +55,19 @@
                                         <td th:text="${user.getCountry()}"></td>
                                         <td th:text="${#strings.listJoin(user.roles, ', ')}"></td>
 
-                                        <td th:action="@{/admin/edit}">
-                                            <button type="submit" class="btn btn-primary btn-sm" th:name="id"
-                                                    th:value="${user.id}">Edit
-                                            </button>
+                                        <td>
+                                            <form th:action="@{/admin/edit}" method="put">
+                                                <input type="hidden" name="id" th:value="${user.id}" />
+                                                <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                            </form>
                                         </td>
-                                        <td th:method="post" th:action="@{/admin/delete}">
-                                            <button type="submit" class="btn btn-danger btn-sm" th:name="id"
-                                                    th:value="${user.id}">Delete
-                                            </button>
+                                        <td>
+                                            <form th:action="@{/admin/delete}" method="post">
+                                                <input type="hidden" name="id" th:value="${user.id}" />
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
                                         </td>
+
                                     </tr>
                                     </tbody>
 

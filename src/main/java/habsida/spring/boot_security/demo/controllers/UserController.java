@@ -6,10 +6,7 @@ import habsida.spring.boot_security.demo.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
@@ -48,7 +45,7 @@ public class UserController {
         User user = userService.userById(id).get();
         mav.addObject("user", user);
         mav.addObject("roles", roleService.listRoles());
-        return mav;
+        return mav ;
     }
 
     @PostMapping("/admin/edit")
