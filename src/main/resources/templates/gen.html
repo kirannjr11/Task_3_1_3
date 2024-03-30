@@ -32,11 +32,20 @@
                         <h1>Admin panel</h1>
                         <div class="card mt-5">
                             <div class="card-header">
-                                <form action="/admin/gen" method="GET">
-                                    <button type="submit" class="btn btn-light">All Users</button>
-                                </form>
-                                <a href="/admin/new" class="btn btn-light">New User</a>
+                                <div class="row">
+
+                                        <form action="/admin/gen" method="GET" class="d-inline">
+                                            <button type="submit" class="btn btn-light">All Users</button>
+                                        </form>
+
+
+                                        <form class="ml-2" action="/admin/new">
+                                            <button type="submit" class="btn btn-light">New User</button>
+                                        </form>
+
+                                </div>
                             </div>
+
 
                             <div class="card-header">
                                 <h2>All Users</h2>

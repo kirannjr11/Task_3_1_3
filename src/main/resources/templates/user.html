@@ -52,13 +52,17 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td th:text="${user.isPresent() ? user.get().id : ''}"></td>
-                                            <td th:text="${user.isPresent() ? user.get().firstName : ''}"></td>
-                                            <td th:text="${user.isPresent() ? user.get().lastName : ''}"></td>
-                                            <td th:text="${user.isPresent() ? user.get().country : ''}"></td>
-                                            <td th:text="${user.isPresent() ? user.get().roles : ''}"></td>
+                                        <tr th:each="user : ${users}">
+                                            <td th:text="${user.id}"></td>
+                                            <td th:text="${user.firstName}"></td>
+                                            <td th:text="${user.lastName}"></td>
+                                            <td th:text="${user.country}"></td>
+                                            <td>
+                                                <span th:each="role : ${user.roles}" th:text="${role.role}"></span>
+                                            </td>
                                         </tr>
+
+
                                         </tbody>
                                     </table>
                                 </div>

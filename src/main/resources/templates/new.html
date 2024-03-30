@@ -31,42 +31,54 @@
                         <h1>Admin Panel</h1>
                         <div class="card mt-5">
                             <div class="card-header">
-                                <button type="button" class="btn btn-light">All Users</button>
-                                <button type="button" class="btn btn-light">New Users</button>
-                            </div>
+                                <div class="row">
 
-                            <div class="card-header">
-                                <h3>Add New Users</h3>
-                            </div>
-                            <div class="card-body">
-                                <form th:method="post" th:action="@{/admin/gen}" th:object="${user}">
-                                    <div class="form-group text-center">
-                                        <label for="firstName">Enter firstname</label>
-                                        <input type="text" th:field="*{firstName}" id="firstName" required/>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <label for="lastName">Enter Lastname</label>
-                                        <input type="text" th:field="*{lastName}" id="lastName" required/>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <label for="country">Enter country</label>
-                                        <input type="text" th:field="*{country}" id="country" required/>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <label for="password">Enter Password</label>
-                                        <input type="text" th:field="*{password}" id="password" required/>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <label for="roles">Roles</label>
-                                        <select id="roles" name="roles" th:field="*{roles}" multiple>
-                                            <option th:each="role : ${roles}" th:value="${role.id}" th:text="${#strings.substringAfter(role.role, 'ROLE_')}" ></option>
-                                        </select>
-                                    </div>
-                                    <div class="text-center">
-                                        <input type="submit" class="btn btn-success" value="add"/>
-                                    </div>
-                                </form>
+                                    <form action="/admin/gen" method="GET" class="d-inline">
+                                        <button type="submit" class="btn btn-light">All Users</button>
+                                    </form>
 
+
+                                    <form class="ml-2" action="/admin/new">
+                                        <button type="submit" class="btn btn-light">New User</button>
+                                    </form>
+
+                                </div>
+
+
+                                <div class="card-header">
+                                    <h3>Add New Users</h3>
+                                </div>
+                                <div class="card-body">
+                                    <form th:method="post" th:action="@{/admin/gen}" th:object="${user}">
+                                        <div class="form-group text-center">
+                                            <label for="firstName">Enter firstname</label>
+                                            <input type="text" th:field="*{firstName}" id="firstName" required/>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="lastName">Enter Lastname</label>
+                                            <input type="text" th:field="*{lastName}" id="lastName" required/>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="country">Enter country</label>
+                                            <input type="text" th:field="*{country}" id="country" required/>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="password">Enter Password</label>
+                                            <input type="text" th:field="*{password}" id="password" required/>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="roles">Roles</label>
+                                            <select id="roles" name="roles" th:field="*{roles}" multiple>
+                                                <option th:each="role : ${roles}" th:value="${role.id}"
+                                                        th:text="${#strings.substringAfter(role.role, 'ROLE_')}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="text-center">
+                                            <input type="submit" class="btn btn-success" value="add"/>
+                                        </div>
+                                    </form>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,6 +86,5 @@
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

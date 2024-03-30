@@ -6,10 +6,12 @@ import habsida.spring.boot_security.demo.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -34,8 +36,10 @@ public class UserController {
     }
 
     @PostMapping("/admin/gen")
-    public String create(@ModelAttribute("user") User user) {
+    public String create(@ModelAttribute("user") User user, Model model) {
         userService.add(user);
+        model.addAttribute("user", user);
+        model.addAttribute("users", userService.listUsers());
         return "redirect:/admin/gen";
     }
 
@@ -65,10 +69,19 @@ public class UserController {
         return "/index";
     }
 
+//    @GetMapping("/admin/user")
+//    public ModelAndView user(Principal principal) {
+//        ModelAndView mov = new ModelAndView("/user");
+//        mov.addObject("user", userService.findByName(principal.getName()));
+//
+//        return mov;
+//    }
+
     @GetMapping("/admin/user")
-    public ModelAndView user(Principal principal) {
-        ModelAndView mov = new ModelAndView("/user");
-        mov.addObject("user", userService.findByName(principal.getName()));
-        return mov;
+    public String getUserPage(Model model) {
+        List<User> users = userService.listUsers();
+        model.addAttribute("users", users);
+        return "user";
     }
+
 }
