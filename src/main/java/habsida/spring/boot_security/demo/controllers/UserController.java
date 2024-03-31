@@ -4,6 +4,8 @@ import habsida.spring.boot_security.demo.models.User;
 import habsida.spring.boot_security.demo.services.RoleService;
 import habsida.spring.boot_security.demo.services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
@@ -24,6 +27,22 @@ public class UserController {
     @GetMapping(value = "/admin/gen")
     public ModelAndView showUsers() {
         ModelAndView mov = new ModelAndView("/gen");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = authentication.getName();
+
+       Optional<User> loggedInUserOptional = userService.findByName(username);
+
+
+        if (loggedInUserOptional.isPresent()) {
+
+            User loggedInUser = loggedInUserOptional.get();
+
+            mov.addObject("loggedInUser", loggedInUser);
+        } else {
+
+            mov.addObject("loggedInUser", null);
+        }
         mov.addObject("users",userService.listUsers());
         return mov;
     }
@@ -69,19 +88,23 @@ public class UserController {
         return "/index";
     }
 
+    @GetMapping("/user")
+    public ModelAndView user(Principal principal) {
+        ModelAndView mov = new ModelAndView("/user");
+        mov.addObject("user", userService.findByName(principal.getName()));
+
+        return mov;
+    }
+
 //    @GetMapping("/admin/user")
-//    public ModelAndView user(Principal principal) {
-//        ModelAndView mov = new ModelAndView("/user");
-//        mov.addObject("user", userService.findByName(principal.getName()));
-//
-//        return mov;
+//    public String getUserPage(Model model, Principal principal) {
+//        List<User> users = userService.listUsers();
+//        model.addAttribute("users", users);
+//        model.addAttribute("username", principal.getName());
+//        return "user";
 //    }
 
-    @GetMapping("/admin/user")
-    public String getUserPage(Model model) {
-        List<User> users = userService.listUsers();
-        model.addAttribute("users", users);
-        return "user";
-    }
+
+
 
 }

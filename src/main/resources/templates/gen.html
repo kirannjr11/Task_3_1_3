@@ -8,7 +8,10 @@
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand">Navbar</a>
+    <div class="text-light">
+        <span th:text="${loggedInUser.firstName}"></span>
+        <span th:text="${loggedInUser.lastName}"></span>
+    </div>
     <form class="form-inline" th:action="@{/logout}" th:method="POST">
         <button class="btn btn-outline-dark my-2 my-sm-0 text-light" type="submit">Logout</button>
     </form>
@@ -19,7 +22,7 @@
             <form action="/admin/gen" method="GET">
                 <button type="submit" class="btn btn-white btn-lg btn-block active">Admin</button>
             </form>
-            <form action="/admin/user" method="GET">
+            <form action="/user" method="GET">
                 <button type="submit" class="btn btn-white btn-lg btn-block active">User</button>
             </form>
         </div>
@@ -34,14 +37,14 @@
                             <div class="card-header">
                                 <div class="row">
 
-                                        <form action="/admin/gen" method="GET" class="d-inline">
-                                            <button type="submit" class="btn btn-light">All Users</button>
-                                        </form>
+                                    <form action="/admin/gen" method="GET" class="d-inline">
+                                        <button type="submit" class="btn btn-light">All Users</button>
+                                    </form>
 
 
-                                        <form class="ml-2" action="/admin/new">
-                                            <button type="submit" class="btn btn-light">New User</button>
-                                        </form>
+                                    <form class="ml-2" action="/admin/new">
+                                        <button type="submit" class="btn btn-light">New User</button>
+                                    </form>
 
                                 </div>
                             </div>
@@ -69,17 +72,22 @@
                                         <td th:text="${user.getFirstName()}"></td>
                                         <td th:text="${user.getLastName()}"></td>
                                         <td th:text="${user.getCountry()}"></td>
-                                        <td th:text="${#strings.listJoin(user.roles, ', ')}"></td>
+                                        <td>
+                                            <span th:each="role, iterStat : ${user.roles}">
+                                                <span th:text="${#strings.substringAfter(role.role, 'ROLE_')}"></span>
+                                                <span th:if="${!iterStat.last}">, </span>
+                                            </span>
+                                        </td>
 
                                         <td>
                                             <form th:action="@{/admin/edit}" method="put">
-                                                <input type="hidden" name="id" th:value="${user.id}" />
+                                                <input type="hidden" name="id" th:value="${user.id}"/>
                                                 <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                             </form>
                                         </td>
                                         <td>
                                             <form th:action="@{/admin/delete}" method="post">
-                                                <input type="hidden" name="id" th:value="${user.id}" />
+                                                <input type="hidden" name="id" th:value="${user.id}"/>
                                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
                                         </td>

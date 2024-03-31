@@ -11,7 +11,10 @@
 
 <body>
 <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand">Navbar</a>
+    <div class="text-light">
+        <a th:text="${user.get().firstName}"></a>
+        <a th:text="${user.get().lastName}"></a>
+    </div>
     <form class="form-inline" th:action="@{/logout}" th:method="POST">
         <button class="btn btn-outline-dark my-2 my-sm-0 text-light" type="submit">Logout</button>
     </form>
@@ -21,9 +24,6 @@
     <div class="row">
         <!-- Navigation Sidebar -->
         <div class="col-md-3 bg-white text-primary d-flex flex-column vh-100 ">
-            <form action="/admin/gen" method="GET">
-                <button type="submit" class="btn btn-white btn-lg btn-block active">Admin</button>
-            </form>
             <form action="/admin/user" method="GET">
                 <button type="submit" class="btn btn-white btn-lg btn-block active">User</button>
             </form>
@@ -52,14 +52,15 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr th:each="user : ${users}">
-                                            <td th:text="${user.id}"></td>
-                                            <td th:text="${user.firstName}"></td>
-                                            <td th:text="${user.lastName}"></td>
-                                            <td th:text="${user.country}"></td>
+                                        <tr>
+                                            <td th:text="${user.get().id}"></td>
+                                            <td th:text="${user.get().firstName}"></td>
+                                            <td th:text="${user.get().lastName}"></td>
+                                            <td th:text="${user.get().country}"></td>
                                             <td>
-                                                <span th:each="role : ${user.roles}" th:text="${role.role}"></span>
+                                                <span th:each="role : ${user.get().roles}" th:text="${role.role}"></span>
                                             </td>
+
                                         </tr>
 
 
