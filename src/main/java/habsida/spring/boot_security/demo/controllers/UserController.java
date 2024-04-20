@@ -83,6 +83,15 @@ public class UserController {
         return "redirect:/admin/gen";
     }
 
+    @GetMapping("/admin/delete")
+    public ModelAndView delete(@RequestParam long id) {
+        ModelAndView mav = new ModelAndView("/delete");
+        User user = userService.userById(id).get();
+        mav.addObject("user", user);
+        mav.addObject("roles", roleService.listRoles());
+        return mav;
+    }
+
     @GetMapping("/index")
     public String index() {
         return "/index";
